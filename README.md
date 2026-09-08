@@ -296,9 +296,6 @@ schema.sql
 migrations/         schema changes for databases created before them
 ```
 
-The auth design — shared password, HMAC-compared, `not-jwt`-signed HttpOnly cookie, verified in the
-router — is lifted from the stock-checker project so both behave the same way.
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
