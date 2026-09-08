@@ -1,0 +1,361 @@
+/*
+ * The head and every row are separate grid containers, so `auto` or a second
+ * `1fr` would resolve differently per row and the columns would drift. Exactly
+ * one flexible track, everything else absolute, keeps them in register.
+ */
+.table {
+  --cols: repeat(5, 5.5ch) minmax(14ch, 1fr) 22ch 8ch 172px;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+  gap: 0 14px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/*
+ * The smaller type lives on the cells, not the row: `ch` in
+ * grid-template-columns resolves against the container's own font, so a smaller
+ * font-size here narrows every track and pulls the headings off their columns.
+ */
+.row-head {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: var(--muted);
+  border-bottom-color: var(--line);
+}
+
+.row-head > * {
+  font-size: var(--t-sm);
+}
+
+.row-job {
+  position: relative;
+  min-height: 42px;
+  transition: background 120ms ease;
+}
+
+.row-job:hover {
+  background: var(--panel);
+}
+
+.row-job[data-open='true'] {
+  background: var(--panel);
+  border-bottom-color: transparent;
+}
+
+/* Failed and overdue are different states, so they get different colours. */
+.row-job::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+}
+
+.row-job[data-verdict='ok']::before {
+  background: color-mix(in srgb, var(--ok) 55%, transparent);
+}
+
+.row-job[data-verdict='failed']::before {
+  background: var(--fail);
+}
+
+.row-job[data-stale='true']::before {
+  background: var(--stale);
+}
+
+.row-job[data-off='true'] {
+  color: var(--muted);
+}
+
+.row-job[data-off='true']::before {
+  background: var(--paused);
+}
+
+/* The crontab block ends here. */
+.cell-job {
+  padding-left: 18px;
+}
+
+
+.cell-cron {
+  display: none;
+}
+
+.cell-f {
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row-job .cell-f {
+  font-size: var(--t-base);
+  letter-spacing: -0.01em;
+}
+
+/* Clicking the name opens the run history. */
+.cell-name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 0 10px 18px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cell-name .name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-name:hover .name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+
+.note {
+  color: var(--muted);
+  font-size: var(--t-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag {
+  flex: none;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+
+.tag-stale {
+  border-color: color-mix(in srgb, var(--stale) 45%, transparent);
+  color: var(--stale);
+}
+
+.tag-paused {
+  border-color: color-mix(in srgb, var(--paused) 70%, transparent);
+  color: var(--paused);
+  background: color-mix(in srgb, var(--paused) 12%, transparent);
+}
+
+.cell-last {
+  display: grid;
+  grid-template-columns: 14ch 1fr;
+  align-items: baseline;
+  gap: 0 10px;
+  font-size: var(--t-sm);
+}
+
+/* "not run yet" is prose, not a status, so it takes the whole cell. */
+.cell-last .muted {
+  grid-column: 1 / -1;
+}
+
+/* One phrase: ok (412ms). */
+.outcome {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.cell-last .verdict {
+  color: var(--ok);
+}
+
+.row-job[data-verdict='failed'] .cell-last .verdict {
+  color: var(--fail);
+}
+
+.cell-last .took,
+.cell-last .when {
+  color: var(--muted);
+}
+
+.cell-last .when {
+  text-align: right;
+}
+
+.cell-r {
+  text-align: right;
+}
+
+.next {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+
+.row-job[data-stale='true'] .next {
+  color: var(--stale);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.cell-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  font-size: var(--t-sm);
+}
+
+.cell-actions .button {
+  padding: 4px 8px;
+}
+
+/* Last in the row, and never coloured. */
+.switch {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.switch input {
+  appearance: none;
+  margin: 0;
+  width: 22px;
+  height: 13px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--ink);
+  cursor: pointer;
+  position: relative;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+
+.switch input::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.switch input:checked {
+  border-color: #3c4c5f;
+  background: var(--panel-hi);
+}
+
+.switch input:checked::after {
+  transform: translateX(9px);
+  background: var(--text);
+}
+
+
+.row-detail {
+  padding: 4px 16px 14px calc(16px + 5.5ch);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 8px;
+  font-size: var(--t-sm);
+}
+
+.detail-url {
+  color: var(--text);
+  word-break: break-all;
+}
+
+.detail-meta .muted {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Narrow: the schedule collapses to one field and the row stacks. */
+@media (max-width: 900px) {
+  .table {
+    --cols: 1fr auto;
+  }
+
+  .row-head {
+    display: none;
+  }
+
+  .row-job {
+    padding: 10px 12px 12px;
+    gap: 4px 12px;
+    align-items: start;
+  }
+
+  .row-job .cell-f {
+    display: none;
+  }
+
+  .cell-cron {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    width: max-content;
+    font-size: var(--t-sm);
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .cell-name {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 2px 0;
+  }
+
+  .row-head .cell-job,
+  .row-job .cell-name {
+    padding-left: 0;
+  }
+
+  .cell-last {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: 14ch auto;
+    justify-content: start;
+  }
+
+  .cell-last .when {
+    text-align: left;
+  }
+
+  .cell-r {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .cell-actions {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-content: flex-start;
+    margin-top: 6px;
+  }
+
+  .row-detail {
+    padding-left: 12px;
+  }
+}

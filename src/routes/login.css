@@ -1,0 +1,57 @@
+.gate {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  padding: 24px;
+}
+
+.gate-form {
+  display: grid;
+  gap: 8px;
+  width: min(320px, 100%);
+}
+
+.gate-title {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.gate-title {
+  margin-bottom: 10px;
+}
+
+.gate-label {
+  color: var(--muted);
+  font-size: var(--t-sm);
+}
+
+.gate-label + .gate-field {
+  margin-bottom: 4px;
+}
+
+.gate-field {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--panel);
+}
+
+/* Tracking makes a masked field's length readable. */
+.gate-field-secret {
+  letter-spacing: 0.06em;
+}
+
+.gate-field:focus {
+  border-color: #3c4c5f;
+}
+
+.gate-error {
+  color: var(--fail);
+  font-size: var(--t-sm);
+}
+
+.gate-go {
+  justify-content: center;
+  margin-top: 4px;
+}

@@ -1,0 +1,191 @@
+/* Prose measure, not the dense grid the rest of the panel uses. */
+.manual {
+  max-width: 74ch;
+  padding: 28px 16px 56px;
+  display: grid;
+  gap: 32px;
+}
+
+.man-block {
+  display: grid;
+  gap: 10px;
+}
+
+.man-h {
+  font-size: var(--t-lg);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.manual p {
+  color: #c3ccd8;
+  line-height: 1.65;
+}
+
+.manual strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.manual code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--text);
+}
+
+/* Secondary detail. */
+.man-aside {
+  color: var(--muted) !important;
+  font-size: var(--t-sm);
+  border-left: 2px solid var(--line);
+  padding-left: 12px;
+}
+
+.man-pre,
+.man-fields {
+  margin: 2px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  background: var(--panel);
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.man-fields {
+  color: var(--muted);
+}
+
+.man-table {
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+  width: 100%;
+}
+
+.man-table td {
+  padding: 5px 14px 5px 0;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: baseline;
+}
+
+.man-table tr:last-child td {
+  border-bottom: none;
+}
+
+.man-code {
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.man-table td:last-child {
+  color: var(--muted);
+  width: 100%;
+}
+
+.man-hosts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.man-hosts li {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--panel);
+  font-size: var(--t-sm);
+}
+
+.man-list,
+.man-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  color: #c3ccd8;
+  line-height: 1.6;
+}
+
+.man-list li {
+  padding-left: 16px;
+  position: relative;
+}
+
+.man-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 1px;
+  background: var(--muted);
+}
+
+.man-legend li {
+  display: grid;
+  /* Exactly two cells: a third child would wrap inside the 4px column. */
+  grid-template-columns: 4px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.man-legend li p {
+  margin: 0;
+}
+
+/* The same bar the table draws, so it reads as a key. */
+.man-bar {
+  align-self: stretch;
+  min-height: 1.4em;
+  border-radius: 1px;
+}
+
+.man-bar[data-state='ok'] {
+  background: color-mix(in srgb, var(--ok) 55%, transparent);
+}
+
+.man-bar[data-state='failed'] {
+  background: var(--fail);
+}
+
+.man-bar[data-state='stale'] {
+  background: var(--stale);
+}
+
+.man-bar[data-state='paused'] {
+  background: var(--paused);
+}
+
+.man-dl {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.man-dl dt {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.man-dl dd {
+  margin: 3px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* A misconfigured allowlist stops every dispatch; it should read as broken. */
+.man-warn {
+  color: var(--text) !important;
+  border-left: 2px solid var(--fail);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--fail) 8%, transparent);
+  border-radius: 0 3px 3px 0;
+}

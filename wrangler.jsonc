@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cronhub",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "observability": {
+    "enabled": true
+  },
+
+  // One heartbeat; every job's own schedule lives in D1 and is matched in JS.
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
+
+  // Without run_worker_first, not_found_handling answers /api/login with
+  // index.html. Only /api/* costs a Worker invocation.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cronhub",
+      "database_id": "976a5452-83b9-400d-914e-f73e410146a3"
+    }
+  ]
+}

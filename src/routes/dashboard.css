@@ -1,0 +1,167 @@
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: var(--t-lg);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* System health in words, before any table is read. */
+.tally {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+
+.tally .num {
+  color: var(--text);
+  margin-right: 1px;
+}
+
+.tally-fail {
+  color: var(--fail);
+}
+
+.tally-fail .num {
+  color: var(--fail);
+}
+
+.tally-stale {
+  color: var(--stale);
+}
+
+.tally-stale .num {
+  color: var(--stale);
+}
+
+.views {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.view {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  color: var(--muted);
+  font-size: var(--t-sm);
+  cursor: pointer;
+}
+
+.view:hover {
+  color: var(--text);
+}
+
+.view[data-on='true'] {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--panel);
+}
+
+.bar-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.misconfig {
+  padding: 8px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--fail) 40%, transparent);
+  background: color-mix(in srgb, var(--fail) 12%, transparent);
+  color: var(--text);
+  font-size: var(--t-sm);
+}
+
+.flash {
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--panel);
+  font-size: var(--t-sm);
+}
+
+.main {
+  flex: 1;
+}
+
+.load-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.empty {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  max-width: 62ch;
+  padding: 64px 16px;
+}
+
+.empty-title {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.empty-copy {
+  color: var(--muted);
+}
+
+.empty-copy code {
+  color: var(--text);
+  font-size: 0.92em;
+}
+
+.failures {
+  padding: 16px;
+}
+
+.failures-copy {
+  color: var(--muted);
+  font-size: var(--t-sm);
+  max-width: 78ch;
+  margin-bottom: 14px;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+
+@media (max-width: 900px) {
+  .bar {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  .views {
+    margin-left: 0;
+    order: 3;
+  }
+
+  .bar-actions {
+    order: 4;
+    margin-left: auto;
+  }
+}

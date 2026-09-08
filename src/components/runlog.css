@@ -1,0 +1,115 @@
+.runlog {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.runlog-empty {
+  color: var(--muted);
+  font-size: var(--t-sm);
+  padding: 10px 0;
+}
+
+.run {
+  display: grid;
+  grid-template-columns: 3px minmax(0, 1fr);
+  gap: 0 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: var(--t-sm);
+}
+
+.run-detail {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Reads left to right and stops; nothing is pushed away. */
+.run-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+
+
+.run-outcome {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 14ch;
+}
+
+.run:last-child {
+  border-bottom: none;
+}
+
+/* The mark carries the colour so the verdict text stays readable. */
+.run-mark {
+  align-self: stretch;
+  border-radius: 2px;
+  background: var(--ok);
+}
+
+.run[data-ok='false'] .run-mark {
+  background: var(--fail);
+}
+
+.run-verdict {
+  color: var(--ok);
+}
+
+.run[data-ok='false'] .run-verdict {
+  color: var(--fail);
+}
+
+.run-code,
+.run-took {
+  color: var(--muted);
+  min-width: 3ch;
+}
+
+.run-job {
+  font-family: var(--mono);
+}
+
+.run-time {
+  color: var(--muted);
+}
+
+.run-manual {
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+
+.run-error {
+  color: var(--fail);
+  max-width: 90ch;
+}
+
+.run-body summary {
+  color: var(--muted);
+  cursor: pointer;
+  width: max-content;
+}
+
+.run-body summary:hover {
+  color: var(--text);
+}
+
+.run-body pre {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  background: var(--ink);
+  font-size: var(--t-xs);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 14em;
+  overflow: auto;
+}

@@ -1,0 +1,19 @@
+# Copy to .dev.vars for local development (never commit .dev.vars).
+# In production set these with `wrangler secret put <NAME>`.
+
+# Platform secrets. Deliberately NOT CRONHUB_-prefixed: the prefix is what makes
+# a secret visible to the dashboard and usable inside a job, and these two must
+# be neither.
+APP_USERNAME=change-me
+APP_PASSWORD=change-me
+AUTH_SECRET=generate-with-openssl-rand-base64-32
+
+# Hostnames a job may target, comma separated. `*.example.com` matches anything
+# beneath example.com but not example.com itself. Leave unset for no restriction.
+# Checked when a job is saved AND again every time it fires.
+ALLOWED_HOSTS=api.github.com,*.example.com
+
+# Job secrets. Every CRONHUB_-prefixed binding is discovered automatically: its
+# NAME is listed in the dashboard and its VALUE can be referenced from a job's
+# url, headers or body as ${CRONHUB_GH_TOKEN}. Values never leave the Worker.
+CRONHUB_GH_TOKEN=github_pat_...

@@ -1,0 +1,83 @@
+/* For the moment it takes to ask /api/session who we are. */
+.boot {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 42%, var(--panel) 0 2px, transparent 2px) no-repeat,
+    var(--ink);
+  animation: boot-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes boot-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+
+.stall {
+  min-height: 100dvh;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 12px;
+  max-width: 48ch;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.stall-title {
+  font-size: var(--t-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.stall-copy {
+  color: var(--muted);
+}
+
+.stall-copy code {
+  font-size: 0.92em;
+  color: var(--text);
+}
+
+/* The only button style: neutral, so status colour stays meaningful. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--panel);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.button:hover:not(:disabled) {
+  border-color: #3c4c5f;
+  background: var(--panel-hi);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.button-quiet {
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+}
+
+.button-quiet:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--panel);
+  border-color: var(--line);
+}
+
+.button-danger:hover:not(:disabled) {
+  border-color: var(--fail);
+  color: var(--fail);
+  background: var(--panel);
+}

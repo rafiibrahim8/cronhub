@@ -1,0 +1,39 @@
+{
+  "name": "cronhub",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.11.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n ui,api -c cyan,magenta \"vite\" \"pnpm run dev:api\"",
+    "dev:api": "mkdir -p dist && wrangler dev --test-scheduled --port 8788 --ip 127.0.0.1",
+    "build": "vite build",
+    "preview": "pnpm run build && wrangler dev --test-scheduled",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p worker/tsconfig.json",
+    "deploy": "pnpm run build && wrangler deploy",
+    "db:init": "wrangler d1 execute cronhub --remote --file=./schema.sql",
+    "db:init:local": "wrangler d1 execute cronhub --local --file=./schema.sql",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "not-jwt": "^1.0.1",
+    "solid-js": "^1.9.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260904.1",
+    "concurrently": "^10.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^6.3.5",
+    "vite-plugin-solid": "^2.11.6",
+    "wrangler": "^4.124.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ]
+  }
+}

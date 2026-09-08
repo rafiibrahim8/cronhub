@@ -1,0 +1,108 @@
+/* Saturation means status. Buttons, links and focus rings stay neutral. */
+:root {
+  --ink: #131a24;
+  --panel: #1a232f;
+  --panel-hi: #202b39;
+  --line: #2a3644;
+  --line-soft: #212c39;
+  --text: #e6ebf2;
+  --muted: #8695a8;
+  --ok: #5fa877;
+  --fail: #d9534e;
+  --stale: #d99b3a;
+  /* A state, not an alarm: visible but unsaturated on purpose. */
+  --paused: #63748a;
+
+  --sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* 1.25 scale off a 14px base. */
+  --t-xs: 11px;
+  --t-sm: 12px;
+  --t-base: 14px;
+  --t-lg: 18px;
+  --t-xl: 22px;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--t-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: #33465c;
+}
+
+/* Every number here sits in a column with other numbers. */
+.num,
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,277 @@
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgb(8 12 18 / 0.6);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.drawer {
+  width: min(620px, 100%);
+  background: var(--ink);
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Answers the action that opened it; nothing else moves. */
+@keyframes drawer-in {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.editor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.editor-title {
+  font-size: var(--t-lg);
+  font-weight: 500;
+}
+
+.editor-body {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field-label {
+  color: var(--muted);
+  font-size: var(--t-sm);
+}
+
+.field-hint {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+
+.hint-cols {
+  color: var(--text);
+  letter-spacing: 0.08em;
+}
+
+.hint-hosts {
+  color: var(--text);
+}
+
+.field-error {
+  color: var(--fail);
+  font-size: var(--t-sm);
+}
+
+.input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--panel);
+  min-width: 0;
+}
+
+.input:focus {
+  border-color: #3c4c5f;
+}
+
+.input::placeholder {
+  color: #5d6d80;
+}
+
+.input-cron {
+  letter-spacing: 0.12em;
+  font-size: var(--t-lg);
+}
+
+.select {
+  width: auto;
+  padding-right: 6px;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.request-line {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+}
+
+/* A wrong field shows itself before saving. */
+.preview {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 8px 10px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  background: var(--panel);
+  font-size: var(--t-sm);
+}
+
+.preview li {
+  display: grid;
+  grid-template-columns: 11ch 7ch 1fr;
+  gap: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.preview-day {
+  color: var(--muted);
+}
+
+.preview-local {
+  color: var(--muted);
+  font-size: var(--t-xs);
+  align-self: center;
+}
+
+.headers {
+  display: grid;
+  gap: 6px;
+}
+
+.header-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) auto;
+  gap: 6px;
+}
+
+.add-header {
+  width: max-content;
+  font-size: var(--t-sm);
+}
+
+.field-pair {
+  display: grid;
+  grid-template-columns: 15ch 1fr;
+  gap: 12px;
+  /* Otherwise the shorter field stretches to the taller one's hint. */
+  align-items: start;
+}
+
+.secrets {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  background: var(--panel);
+}
+
+.secrets-copy,
+.secrets-empty {
+  color: var(--muted);
+  font-size: var(--t-sm);
+  max-width: 62ch;
+}
+
+.secrets-empty code,
+.secrets-copy code {
+  color: var(--text);
+  font-size: 0.92em;
+}
+
+.secret-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.secret {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--muted);
+  font-size: var(--t-sm);
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+.secret:hover {
+  border-color: #3c4c5f;
+  color: var(--text);
+}
+
+/* Already referenced in this job. */
+.secret[data-used='true'] {
+  border-color: #3c4c5f;
+  background: var(--panel-hi);
+  color: var(--text);
+}
+
+.editor-foot {
+  display: grid;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  background: var(--ink);
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.editor-spacer {
+  flex: 1;
+}
+
+.confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+
+@media (max-width: 620px) {
+  .field-pair,
+  .header-row,
+  .request-line {
+    grid-template-columns: 1fr;
+  }
+
+  .preview li {
+    grid-template-columns: 11ch 1fr;
+  }
+
+  .preview-local {
+    grid-column: 1 / -1;
+  }
+}
